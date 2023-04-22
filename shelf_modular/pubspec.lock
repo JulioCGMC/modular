@@ -196,10 +196,9 @@ packages:
   modular_core:
     dependency: "direct main"
     description:
-      name: modular_core
-      sha256: "5f4f8d35b942445381d976139c5dcca7890a708c78a0105507aaba25d95128c1"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../modular_core"
+      relative: true
+    source: path
     version: "3.0.0-alpha.5"
   node_preamble:
     dependency: transitive
