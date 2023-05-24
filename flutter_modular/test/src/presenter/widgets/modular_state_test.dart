@@ -4,7 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('ModularState', (tester) async {
-    final modularApp = ModularApp(module: CustomModule(), child: const AppWidget());
+    final modularApp =
+        ModularApp(module: CustomModule(), child: const AppWidget());
     await tester.pumpWidget(modularApp);
 
     await tester.pump();
@@ -42,17 +43,17 @@ class HomeExample extends StatefulWidget {
   const HomeExample({Key? key}) : super(key: key);
 
   @override
-  _HomeExampleState createState() => _HomeExampleState();
+  State<HomeExample> createState() => _HomeExampleState();
 }
 
 // ignore: deprecated_member_use_from_same_package
 class _HomeExampleState extends ModularState<HomeExample, String> {
   @override
   Widget build(BuildContext context) {
-    debugPrint(cubit.toString());
-    debugPrint(bloc.toString());
-    debugPrint(store.toString());
-    debugPrint(controller.toString());
+    debugPrint(cubit);
+    debugPrint(bloc);
+    debugPrint(store);
+    debugPrint(controller);
     return Container();
   }
 }

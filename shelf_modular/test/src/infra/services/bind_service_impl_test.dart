@@ -17,10 +17,13 @@ void main() {
       expect(service.getBind<String>().getOrElse((left) => ''), 'test');
     });
     test('should throw error not found bind', () {
-      when(() => injector.get<String>())
-          .thenThrow(AutoInjectorException('String'));
+      when(() => injector.get<String>()).thenThrow(
+        const AutoInjectorException('String'),
+      );
       expect(
-          service.getBind<String>().fold(id, id), isA<BindNotFoundException>());
+        service.getBind<String>().fold(id, id),
+        isA<BindNotFoundException>(),
+      );
     });
   });
 

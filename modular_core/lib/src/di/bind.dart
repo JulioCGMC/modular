@@ -111,7 +111,8 @@ class FactoryBind<T extends Object> extends Bind<T> {
 
 class InstanceBind<T extends Object> extends Bind<T> {
   final T instance;
-  InstanceBind(this.instance, {super.onDispose, super.notifier}) : super(() => instance);
+  InstanceBind(this.instance, {super.onDispose, super.notifier})
+      : super(() => instance);
 
   @override
   void includeInjector(AutoInjector injector) {

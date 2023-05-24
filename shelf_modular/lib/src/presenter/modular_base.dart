@@ -1,3 +1,5 @@
+// ignore_for_file: noop_primitive_operations, avoid_print
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -27,14 +29,18 @@ abstract class IModularBase {
   void destroy();
 
   /// Responsible for starting the app.
-  /// It should only be called once, but it should be the first method to be called before a route or bind lookup.
+  /// It should only be called once, but it should be the first method to
+  /// be called before a route or bind lookup.
   /// [module]: Start initial module.
   /// [middlewares]: List of Shelf middlewares.
-  Handler call(
-      {required Module module, List<Middleware> middlewares = const []});
+  Handler call({
+    required Module module,
+    List<Middleware> middlewares = const [],
+  });
 
   /// Responsible for starting the app.
-  /// It should only be called once, but it should be the first method to be called before a route or bind lookup.
+  /// It should only be called once, but it should be the first method to
+  /// be called before a route or bind lookup.
   Handler start({required Module module});
 
   /// Request an instance by [Type]
@@ -70,8 +76,7 @@ class ModularBase implements IModularBase {
   );
 
   @override
-  bool dispose<B extends Object>() =>
-      disposeBind<B>().getOrElse((left) => false);
+  bool dispose<B extends Object>() => disposeBind<B>().getOrElse((left) => false);
 
   @override
   B get<B extends Object>() {
@@ -87,23 +92,25 @@ class ModularBase implements IModularBase {
   void destroy() => finishModule();
 
   @override
-  Handler call(
-      {required Module module, List<Middleware> middlewares = const []}) {
+  Handler call({
+    required Module module,
+    List<Middleware> middlewares = const [],
+  }) {
     if (!_moduleHasBeenStarted) {
-      startModule(module)
-          .fold((r) => print('${module.runtimeType} started!'), (l) => throw l);
+      startModule(module).fold((r) => print('${module.runtimeType} started!'), (l) => throw l);
       _moduleHasBeenStarted = true;
 
       setPrintResolver(print);
-      var pipeline = Pipeline();
-      for (var middleware in middlewares) {
+      var pipeline = const Pipeline();
+      for (final middleware in middlewares) {
         pipeline = pipeline.addMiddleware(middleware);
       }
 
       return pipeline.addHandler(handler);
     } else {
       throw ModuleStartedException(
-          'Module ${module.runtimeType} is already started');
+        'Module ${module.runtimeType} is already started',
+      );
     }
   }
 
@@ -115,18 +122,17 @@ class ModularBase implements IModularBase {
     try {
       final data = await tryJsonDecode(request);
       final params = RouteParmsDTO(
-          url: '/${request.url.toString()}',
-          schema: request.method,
-          arguments: data);
+        url: '/${request.url.toString()}',
+        schema: request.method,
+        arguments: data,
+      );
       return getRoute //
           .call(params)
           .map((route) => _routeSuccess(route, request))
           .mapError(_routeError)
           .fold(identity, identity);
     } on Exception catch (e, s) {
-      if (e
-          .toString()
-          .contains('Exception: Got a response for hijacked request')) {
+      if (e.toString().contains('Exception: Got a response for hijacked request')) {
         return Response.ok('');
       } else {
         print(e.toString());
@@ -138,12 +144,11 @@ class ModularBase implements IModularBase {
 
   FutureOr<Response> _routeSuccess(ModularRoute? route, Request request) async {
     final middlewares = route?.middlewares ?? [];
-    var pipeline = Pipeline();
+    var pipeline = const Pipeline();
 
-    for (var middleware in middlewares) {
+    for (final middleware in middlewares) {
       if (middleware is ModularMiddleware) {
-        pipeline = pipeline
-            .addMiddleware(((innerHandler) => middleware(innerHandler, route)));
+        pipeline = pipeline.addMiddleware((innerHandler) => middleware(innerHandler, route));
       }
     }
 
@@ -195,8 +200,7 @@ class ModularBase implements IModularBase {
     return {};
   }
 
-  bool _isMultipart(Request request) =>
-      _extractMultipartBoundary(request) != null;
+  bool _isMultipart(Request request) => _extractMultipartBoundary(request) != null;
 
   String? _extractMultipartBoundary(Request request) {
     if (!request.headers.containsKey('Content-Type')) return null;

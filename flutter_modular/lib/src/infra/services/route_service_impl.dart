@@ -12,8 +12,11 @@ class RouteServiceImpl implements RouteService {
 
   @override
   AsyncResult<ModularRoute, ModularError> getRoute(RouteParmsDTO params) async {
-    var route = await tracker.findRoute(params.url,
-        data: params.arguments, schema: params.schema);
+    final route = await tracker.findRoute(
+      params.url,
+      data: params.arguments,
+      schema: params.schema,
+    );
     if (route != null) {
       return Success(route);
     } else {

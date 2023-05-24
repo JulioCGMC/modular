@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_constructors_over_static_methods
+
 import 'dart:async';
 
 import 'package:modular_core/modular_core.dart';
@@ -99,7 +101,8 @@ void main() {
 
   test('find route with schema', () async {
     expect(await tracker.findRoute('/schema'), isNull);
-    final route = await tracker.findRoute('/schema', schema: 'tag') as CustomRoute?;
+    final route =
+        await tracker.findRoute('/schema', schema: 'tag') as CustomRoute?;
     expect(route?.uri.path, '/schema');
     expect(route?.data, 'withSchema');
   });
@@ -206,7 +209,7 @@ class CustomMidleware implements Middleware {
   }
 
   @override
-  FutureOr<ModularRoute?> pos(ModularRoute route, data) => route;
+  FutureOr<ModularRoute?> pos(ModularRoute route, dynamic data) => route;
 }
 
 class CustomRoute extends ModularRoute {

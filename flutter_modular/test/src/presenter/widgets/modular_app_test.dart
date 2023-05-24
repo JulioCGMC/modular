@@ -43,7 +43,8 @@ class CustomModule extends Module {
   final List<Bind> binds = [
     Bind.instance<String>('test'),
     Bind.singleton<ValueNotifier<int>>((i) => ValueNotifier<int>(0)),
-    Bind.singleton<Stream<int>>((i) => Stream<int>.value(0).asBroadcastStream()),
+    Bind.singleton<Stream<int>>(
+        (i) => Stream<int>.value(0).asBroadcastStream()),
     Bind.singleton<MyStore>((i) => MyStore()),
   ];
 

@@ -11,7 +11,7 @@ class ModularRouteFake extends Fake implements ModularRoute {}
 void main() {
   final tracker = TrackerMock();
   final service = RouteServiceImpl(tracker);
-  final params = RouteParmsDTO(url: '/');
+  const params = RouteParmsDTO(url: '/');
 
   setUp(() {
     reset(tracker);
@@ -19,8 +19,9 @@ void main() {
 
   group('getRoute', () {
     test('should get route', () async {
-      when(() => tracker.findRoute(params.url))
-          .thenAnswer((_) async => ModularRouteFake());
+      when(() => tracker.findRoute(params.url)).thenAnswer(
+        (_) async => ModularRouteFake(),
+      );
       final result = await service.getRoute(params);
       expect(result.isSuccess(), true);
     });

@@ -3,7 +3,7 @@ import 'package:modular_core/modular_core.dart';
 import 'package:triple/triple.dart';
 
 class LocalNotifier extends ChangeNotifier {
-  update() => notifyListeners();
+  void update() => notifyListeners();
 }
 
 class TripleBind {
@@ -18,7 +18,9 @@ class TripleBind {
     return notifier;
   }
 
-  static Bind<T> singleton<T extends Store>(T Function(AutoInjector i) factoryFunction) {
+  static Bind<T> singleton<T extends Store>(
+    T Function(AutoInjector i) factoryFunction,
+  ) {
     return Bind.singleton<T>(
       factoryFunction,
       onDispose: (store) {

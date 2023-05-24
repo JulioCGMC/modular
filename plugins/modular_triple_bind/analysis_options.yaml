@@ -15,9 +15,10 @@ include: package:flutterando_analysis/flutter_package.yaml
 
 # Uncomment the following section to specify additional rules.
 
-# linter:
-#   rules:
-#     - camel_case_types
+linter:
+  rules:
+    public_member_api_docs: false
+    cascade_invocations: false
 
 # analyzer:
 #   exclude:

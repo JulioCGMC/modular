@@ -29,7 +29,8 @@ class BindServiceImpl extends BindService {
   Result<Unit, ModularError> replaceInstance<T>(T instance) {
     final isAdded = injector.isAdded<T>();
     if (!isAdded) {
-      return BindNotFoundException('$T unregistred', StackTrace.current).toFailure();
+      return BindNotFoundException('$T unregistred', StackTrace.current)
+          .toFailure();
     }
 
     injector.replaceInstance<T>(instance);

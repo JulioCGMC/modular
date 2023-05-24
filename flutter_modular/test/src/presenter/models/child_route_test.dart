@@ -4,12 +4,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('instance', () {
-    var route = ChildRoute('/', child: (context, args) => Container());
+    final route = ChildRoute('/', child: (context, args) => Container());
     expect(route.name, '/');
   });
 
   test('Don\'t use name "/" in route\'s children when parent be "/" too', () {
-    var route = ChildRoute('/', child: (context, args) => Container());
+    final route = ChildRoute('/', child: (context, args) => Container());
     expect(
         () => ChildRoute('/',
             child: (context, args) => Container(), children: [route]),

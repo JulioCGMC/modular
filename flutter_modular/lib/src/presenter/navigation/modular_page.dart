@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modular_core/modular_core.dart';
+
 import '../errors/errors.dart';
 import '../models/modular_args.dart';
 import '../models/route.dart';
-import 'package:modular_core/modular_core.dart';
 
 class ModularPage<T> extends Page<T> {
   final ParallelRoute route;
@@ -11,13 +12,13 @@ class ModularPage<T> extends Page<T> {
   final ModularFlags flags;
   final ModularArguments args;
 
-  ModularPage(
-      {LocalKey? key,
-      required this.route,
-      this.isEmpty = false,
-      required this.args,
-      required this.flags})
-      : super(key: key, name: route.uri.toString(), arguments: args.data);
+  ModularPage({
+    LocalKey? key,
+    required this.route,
+    this.isEmpty = false,
+    required this.args,
+    required this.flags,
+  }) : super(key: key, name: route.uri.toString(), arguments: args.data);
 
   factory ModularPage.empty() {
     return ModularPage(
@@ -72,7 +73,7 @@ class ModularPage<T> extends Page<T> {
         builder: (_) => page,
       );
     } else {
-      var selectTransition = route.transitions[transitionType];
+      final selectTransition = route.transitions[transitionType];
       return selectTransition!(
           (_, __) => page,
           route.duration ?? const Duration(milliseconds: 300),

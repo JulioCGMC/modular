@@ -4,7 +4,7 @@ abstract class ModularError implements Exception {
 
   const ModularError(this.message, [this.stackTrace]);
 
-  String _returnStackTrace() => stackTrace != null ? '\n${stackTrace.toString()}' : '';
+  String _returnStackTrace() => stackTrace != null ? '\n$stackTrace' : '';
 
   @override
   String toString() => '$runtimeType: $message${_returnStackTrace()}';

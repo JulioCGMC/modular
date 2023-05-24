@@ -5,13 +5,21 @@ import 'package:modular_core/modular_core.dart';
 import '../navigation/transitions/transitions.dart';
 
 typedef ModularChild = Widget Function(
-    BuildContext context, ModularArguments args);
+  BuildContext context,
+  ModularArguments args,
+);
 typedef RouteBuilder<T> = Route<T> Function(WidgetBuilder, RouteSettings);
 
 class ParallelRoute<T> extends ModularRoute {
   /// Whether the route should remain in memory when it is inactive.
-  /// If this is true, then the route is maintained, so that any futures it is holding from the next route will properly resolve when the next route pops. If this is not necessary, this can be set to false to allow the framework to entirely discard the route's widget hierarchy when it is not visible.
-  /// If this getter would ever start returning a different value, the [changedInternalState] should be invoked so that the change can take effect.
+  /// If this is true, then the route is maintained, so that any
+  /// futures it is holding from the next route will properly resolve
+  /// when the next route pops. If this is not necessary, this can
+  /// be set to false to allow the framework to entirely discard
+  /// the route's widget hierarchy when it is not visible.
+  /// If this getter would ever start returning a different value,
+  /// the changedInternalState should be invoked so that the change
+  ///  can take effect.
   final bool maintainState;
 
   /// Widget Builder that will be called when prompted in navigation.
@@ -22,7 +30,8 @@ class ParallelRoute<T> extends ModularRoute {
   final TransitionType? transition;
 
   /// Defines a custom transition.
-  /// If the transition is TransitionType.custom, it becomes mandatory to add a CustomTransition() object.
+  /// If the transition is TransitionType.custom, it becomes mandatory
+  /// to add a CustomTransition() object.
   final CustomTransition? customTransition;
 
   /// define the Transition duration
@@ -46,7 +55,6 @@ class ParallelRoute<T> extends ModularRoute {
     List<Middleware> middlewares = const [],
     Module? module,
     Uri? uri,
-    Map<ModularKey, ModularRoute>? routeMap,
     Map<Type, Module> innerModules = const {},
   }) : super(
           name,
@@ -82,8 +90,11 @@ class ParallelRoute<T> extends ModularRoute {
     return ParallelRoute<T>(name: '');
   }
 
-  factory ParallelRoute.module(String name,
-      {required Module module, List<Middleware> middlewares = const []}) {
+  factory ParallelRoute.module(
+    String name, {
+    required Module module,
+    List<Middleware> middlewares = const [],
+  }) {
     final route = ParallelRoute<T>(name: name, middlewares: middlewares);
     return route.addModule(name, module: module);
   }
@@ -184,10 +195,16 @@ enum TransitionType {
 
 class CustomTransition {
   final Widget Function(
-          BuildContext, Animation<double>, Animation<double>, Widget)
-      transitionBuilder;
-  Widget Function(BuildContext, Animation<double>, Animation<double>)?
-      pageBuilder;
+    BuildContext,
+    Animation<double>,
+    Animation<double>,
+    Widget,
+  ) transitionBuilder;
+  Widget Function(
+    BuildContext,
+    Animation<double>,
+    Animation<double>,
+  )? pageBuilder;
   final Duration transitionDuration;
   final Duration reverseTransitionDuration;
   final bool opaque;

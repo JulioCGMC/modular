@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:auto_injector/auto_injector.dart';
@@ -27,16 +29,23 @@ abstract class Tracker {
   factory Tracker(AutoInjector injector) => _Tracker(injector);
 
   /// Searches for a route by name or context throughout the tree.
-  FutureOr<ModularRoute?> findRoute(String path, {dynamic data, String schema = ''});
+  FutureOr<ModularRoute?> findRoute(
+    String path, {
+    dynamic data,
+    String schema = '',
+  });
 
-  /// Reports whether a route will leave the route context. This is important to call automatic dispose of the entire context.
+  /// Reports whether a route will leave the route context.
+  /// This is important to call automatic dispose of the entire context.
   void reportPopRoute(ModularRoute route);
 
-  /// It informs you that a new route has been found and that it needs its dependent BindContexts started as well.
+  /// It informs you that a new route has been found and that
+  /// it needs its dependent BindContexts started as well.
   void reportPushRoute(ModularRoute route);
 
   /// Responsible for starting the app.
-  /// It should only be called once, but it should be the first method to be called before a route or bind lookup.
+  /// It should only be called once, but it should be the
+  /// first method to be called before a route or bind lookup.
   void runApp(Module module, [String initialRoutePath = '/']);
 
   /// Add a Module to Injection System.<br>
@@ -83,7 +92,11 @@ class _Tracker implements Tracker {
   String get currentPath => arguments.uri.toString();
 
   @override
-  FutureOr<ModularRoute?> findRoute(String path, {dynamic data, String schema = ''}) async {
+  FutureOr<ModularRoute?> findRoute(
+    String path, {
+    dynamic data,
+    String schema = '',
+  }) async {
     final uri = _resolverPath(path);
     final modularKey = ModularKey(schema: schema, name: uri.path);
 
@@ -99,11 +112,15 @@ class _Tracker implements Tracker {
           break;
         }
       }
-      if (uriCandidate.pathSegments.length != uri.pathSegments.length && !uriCandidate.path.contains('**')) {
+      if (uriCandidate.pathSegments.length != uri.pathSegments.length //
+          &&
+          !uriCandidate.path.contains('**')) {
         continue;
       }
 
-      if (!(uriCandidate.path.contains(':') || uriCandidate.path.contains('**'))) {
+      if (!(uriCandidate.path.contains(':') //
+          ||
+          uriCandidate.path.contains('**'))) {
         continue;
       }
 
@@ -307,7 +324,8 @@ class _Tracker implements Tracker {
       }
 
       if (preview.name.contains('**')) {
-        if (!actual.name.contains('**') || actual.name.split('/').length > preview.name.split('/').length) {
+        if (!actual.name.contains('**') ||
+            actual.name.split('/').length > preview.name.split('/').length) {
           return 1;
         }
       }

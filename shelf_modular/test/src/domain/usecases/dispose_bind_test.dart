@@ -9,7 +9,7 @@ void main() {
   final service = BindServiceMock();
   final usecase = DisposeBindImpl(service);
   test('dispose bind', () {
-    when(() => service.disposeBind<String>()).thenReturn(Success(true));
+    when(() => service.disposeBind<String>()).thenReturn(const Success(true));
 
     expect(usecase.call<String>().getOrElse((left) => false), true);
   });

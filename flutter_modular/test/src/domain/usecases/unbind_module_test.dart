@@ -9,7 +9,7 @@ void main() {
   final service = ModuleServiceMock();
   final usecase = UnbindModuleImpl(service);
   test('UnbindModuleImpl', () {
-    when(() => service.unbind()).thenReturn(const Success(unit));
+    when(service.unbind).thenReturn(const Success(unit));
 
     expect(usecase.call().getOrNull(), unit);
   });

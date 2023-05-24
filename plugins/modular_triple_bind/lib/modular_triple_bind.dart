@@ -4,5 +4,3 @@
 library modular_triple_bind;
 
 export 'src/modular_triple_bind_base.dart';
-
-// TODO: Export any libraries intended for clients of this package.

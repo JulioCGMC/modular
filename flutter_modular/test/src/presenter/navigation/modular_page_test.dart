@@ -116,7 +116,7 @@ void main() {
         .where((k) => k != TransitionType.noTransition)
         .toList();
 
-    for (var key in keys) {
+    for (final key in keys) {
       when(() => route.transition).thenReturn(key);
       when(() => route.transitions).thenReturn(transitionMap);
       when(() => route.child).thenReturn((_, __) => widget);

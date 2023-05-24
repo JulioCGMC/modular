@@ -18,7 +18,13 @@ class GithubSearchDatasource implements SearchDatasource {
       final json = jsonDecode(result.body);
       debugPrint('execute datasource');
       var jsonList = json['items'] as List;
-      var list = jsonList.map((item) => ResultModel(name: '', nickname: item['login'], image: item['avatar_url'], url: item['url'])).toList();
+      var list = jsonList
+          .map((item) => ResultModel(
+              name: '',
+              nickname: item['login'],
+              image: item['avatar_url'],
+              url: item['url']))
+          .toList();
       return list;
     } else {
       throw Exception();

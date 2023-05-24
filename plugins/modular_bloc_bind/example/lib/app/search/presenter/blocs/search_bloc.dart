@@ -18,7 +18,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(LoadingState());
         final result = await searchByText(event.text);
 
-        result.fold((l) => emit(ErrorState('error')), (r) => emit(ListedSearchState(r)));
+        result.fold((l) => emit(ErrorState('error')),
+            (r) => emit(ListedSearchState(r)));
       },
       transformer: debounce(const Duration(milliseconds: 300)),
     );

@@ -9,7 +9,7 @@ void main() {
   final service = BindServiceMock();
   final usecase = GetBindImpl(service);
   test('get bind', () {
-    when(() => service.getBind<String>()).thenReturn(Success('test'));
+    when(() => service.getBind<String>()).thenReturn(const Success('test'));
 
     expect(usecase.call<String>().getOrElse((left) => ''), 'test');
   });

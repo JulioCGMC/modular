@@ -1,3 +1,6 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class RouteParmsDTO {
   final String url;
   final dynamic arguments;
@@ -9,10 +12,7 @@ class RouteParmsDTO {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is RouteParmsDTO &&
-        other.url == url &&
-        other.arguments == arguments &&
-        other.schema == schema;
+    return other is RouteParmsDTO && other.url == url && other.arguments == arguments && other.schema == schema;
   }
 
   @override

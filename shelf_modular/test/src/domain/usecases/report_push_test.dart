@@ -10,7 +10,7 @@ void main() {
   final usecase = ReportPushImpl(service);
   test('report push route', () {
     final route = RouteMock();
-    when(() => service.reportPush(route)).thenReturn(Success(unit));
+    when(() => service.reportPush(route)).thenReturn(const Success(unit));
     final result = usecase.call(route);
     expect(result.isSuccess(), true);
   });

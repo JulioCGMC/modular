@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../module/module.dart';
 import 'middleware.dart';
 
@@ -26,7 +28,8 @@ abstract class ModularRoute {
   /// guard your parent's path
   final String parent;
 
-  /// Contains a list of all BindContexts that will need to be active when this route is active.
+  /// Contains a list of all BindContexts that will need
+  /// to be active when this route is active.
   final Map<Type, Module> innerModules;
 
   /// Create a new Route by adding a RouteContext to the context.
@@ -73,6 +76,7 @@ abstract class ModularRoute {
   }
 }
 
+@immutable
 class ModularKey {
   final String schema;
   final String name;

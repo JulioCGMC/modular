@@ -10,7 +10,7 @@ void main() {
   final usecase = StartModuleImpl(service);
   final module = ModuleMock();
   test('start module', () {
-    when(() => service.start(module)).thenReturn(Success(unit));
+    when(() => service.start(module)).thenReturn(const Success(unit));
 
     expect(usecase.call(module).isSuccess(), true);
   });

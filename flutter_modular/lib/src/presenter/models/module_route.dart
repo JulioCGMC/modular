@@ -3,8 +3,26 @@ import 'package:modular_core/modular_core.dart';
 
 import '../guards/route_guard.dart';
 
-/// This route represents a cluster of routes from another module that will be concatenated to the context of the parent module.
+/// This route represents a cluster of routes from another module
+/// that will be concatenated to the context of the parent module.
 class ModuleRoute<T> extends ParallelRoute<T> {
+  factory ModuleRoute(
+    String name, {
+    required Module module,
+    TransitionType? transition,
+    CustomTransition? customTransition,
+    Duration? duration,
+    List<RouteGuard> guards = const [],
+  }) {
+    final route = ModuleRoute<T>._start(
+      name: name,
+      middlewares: guards,
+      transition: transition,
+      customTransition: customTransition,
+      duration: duration,
+    );
+    return route.addModule(name, module: module) as ModuleRoute<T>;
+  }
   ModuleRoute._start({
     ModularChild? child,
     required String name,
@@ -19,8 +37,10 @@ class ModuleRoute<T> extends ParallelRoute<T> {
     List<Middleware> middlewares = const [],
     Uri? uri,
     Map<Type, Module> innerModules = const {},
-  })  : assert(!name.contains('/:'),
-            'ModuleRoute should not contain dynamic route'),
+  })  : assert(
+          !name.contains('/:'),
+          'ModuleRoute should not contain dynamic route',
+        ),
         super(
           name: name,
           child: child,
@@ -36,23 +56,6 @@ class ModuleRoute<T> extends ParallelRoute<T> {
           uri: uri ?? Uri.parse('/'),
           innerModules: innerModules,
         );
-
-  factory ModuleRoute(
-    String name, {
-    required Module module,
-    TransitionType? transition,
-    CustomTransition? customTransition,
-    Duration? duration,
-    List<RouteGuard> guards = const [],
-  }) {
-    final route = ModuleRoute<T>._start(
-        name: name,
-        middlewares: guards,
-        transition: transition,
-        customTransition: customTransition,
-        duration: duration);
-    return route.addModule(name, module: module) as ModuleRoute<T>;
-  }
 
   @override
   ModuleRoute<T> copyWith({

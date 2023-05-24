@@ -19,7 +19,8 @@ abstract class IModularBase {
   void destroy();
 
   // Responsible for starting the app.
-  /// It should only be called once, but it should be the first method to be called before a route or bind lookup.
+  /// It should only be called once, but it should be the first
+  /// method to be called before a route or bind lookup.
   void init(Module module);
 
   /// value is '/';
@@ -31,7 +32,8 @@ abstract class IModularBase {
 
   /// Retrieves the IModularNavigator instance.
   /// By default the instance that controls all routes globally is returned,
-  /// but this behavior can be replaced in ModularNavigator by a custom instance:
+  /// but this behavior can be replaced in ModularNavigator
+  /// by a custom instance:
   ///
   /// Modular.navigatorDelegate = MyNavigatorDelegate();
   IModularNavigator get to;
@@ -131,7 +133,8 @@ class ModularBase implements IModularBase {
   });
 
   @override
-  bool dispose<B extends Object>() => disposeBind<B>().getOrElse((left) => false);
+  bool dispose<B extends Object>() =>
+      disposeBind<B>().getOrElse((left) => false);
 
   @override
   B get<B extends Object>() {
@@ -152,10 +155,12 @@ class ModularBase implements IModularBase {
   @override
   void init(Module module) {
     if (!_moduleHasBeenStarted) {
-      startModule(module).fold((r) => debugPrint('${module.runtimeType} started!'), (l) => throw l);
+      startModule(module).fold(
+          (r) => debugPrint('${module.runtimeType} started!'), (l) => throw l);
       _moduleHasBeenStarted = true;
     } else {
-      throw ModuleStartedException('Module ${module.runtimeType} is already started');
+      throw ModuleStartedException(
+          'Module ${module.runtimeType} is already started');
     }
   }
 
@@ -163,7 +168,8 @@ class ModularBase implements IModularBase {
   IModularNavigator get to => navigatorDelegate ?? navigator;
 
   @override
-  ModularArguments get args => getArguments().getOrElse((l) => ModularArguments.empty());
+  ModularArguments get args =>
+      getArguments().getOrElse((l) => ModularArguments.empty());
 
   final flags = ModularFlags();
 

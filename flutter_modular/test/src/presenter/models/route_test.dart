@@ -26,7 +26,8 @@ void main() {
 
   test('route addParent', () {
     final routeParent = ParallelRoute.empty().copyWith(name: '/parent');
-    var route = ParallelRoute.empty().copyWith(name: '/').addParent(routeParent);
+    final route =
+        ParallelRoute.empty().copyWith(name: '/').addParent(routeParent);
     expect(route.name, '/parent/');
   });
 }

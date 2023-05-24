@@ -55,7 +55,8 @@ class UnbindModuleMock extends Mock implements UnbindModule {}
 
 class ReplaceInstanceMock extends Mock implements ReplaceInstance {}
 
-class ModularRouteInformationParserMock extends Mock implements ModularRouteInformationParser {}
+class ModularRouteInformationParserMock extends Mock
+    implements ModularRouteInformationParser {}
 
 class ModularRouterDelegateMock extends Mock implements ModularRouterDelegate {}
 
@@ -128,11 +129,12 @@ void main() {
     when(() => startModule.call(module)).thenReturn(const Success(unit));
     modularBase.init(module);
     verify(() => startModule.call(module));
-    expect(() => modularBase.init(module), throwsA(isA<ModuleStartedException>()));
+    expect(
+        () => modularBase.init(module), throwsA(isA<ModuleStartedException>()));
   });
 
   test('dispose', () {
-    when(() => disposeBind.call()).thenReturn(const Success(true));
+    when(disposeBind.call).thenReturn(const Success(true));
     expect(modularBase.dispose(), true);
   });
 
@@ -143,7 +145,8 @@ void main() {
 
   test('tryGet', () {
     when(() => getBind.call<String>()).thenReturn(const Success('modular'));
-    when(() => getBind.call<int>()).thenReturn(const Failure(BindNotFoundException('')));
+    when(() => getBind.call<int>())
+        .thenReturn(const Failure(BindNotFoundException('')));
     expect(modularBase.tryGet<String>(), 'modular');
     expect(modularBase.tryGet<int>(), isNull);
   });
@@ -163,19 +166,20 @@ void main() {
 
   test('replaceInstance', () {
     const instance = 'String';
-    when(() => replaceInstance.call<String>(instance)).thenReturn(const Success(unit));
+    when(() => replaceInstance.call<String>(instance))
+        .thenReturn(const Success(unit));
     modularBase.replaceInstance<String>(instance);
     verify(() => replaceInstance.call<String>(instance)).called(1);
   });
 
   test('destroy', () {
-    when(() => finishModule.call()).thenReturn(const Success(unit));
+    when(finishModule.call).thenReturn(const Success(unit));
     modularBase.destroy();
-    verify(() => finishModule.call()).called(1);
+    verify(finishModule.call).called(1);
   });
 
   test('setArguments', () {
-    when(() => getArguments.call()).thenReturn(Success(ModularArguments.empty()));
+    when(getArguments.call).thenReturn(Success(ModularArguments.empty()));
     when(() => setArguments.call(any())).thenReturn(const Success(unit));
     modularBase.setArguments('args');
     verify(() => setArguments.call(
@@ -187,6 +191,7 @@ void main() {
 class MyGuard extends RouteGuard {
   final bool activate;
 
+  // ignore: avoid_positional_boolean_parameters
   MyGuard(this.activate);
 
   @override

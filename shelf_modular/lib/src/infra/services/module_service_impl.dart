@@ -10,12 +10,12 @@ class ModuleServiceImpl extends ModuleService {
   @override
   Result<Unit, ModularError> finish() {
     tracker.finishApp();
-    return Success(unit);
+    return const Success(unit);
   }
 
   @override
   Result<Unit, ModularError> start(Module module) {
     tracker.runApp(module);
-    return Success(unit);
+    return const Success(unit);
   }
 }

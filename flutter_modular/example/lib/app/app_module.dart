@@ -23,7 +23,8 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind.instance<http.Client>(http.Client()),
     Bind.singleton<SearchDatasource>((i) => GithubSearchDatasource(i())),
-    Bind.singleton<SearchRepository>((i) => SearchRepositoryImpl(i<SearchDatasource>())),
+    Bind.singleton<SearchRepository>(
+        (i) => SearchRepositoryImpl(i<SearchDatasource>())),
     AutoBind.singleton<SearchByText>(SearchByTextImpl.new),
     StoreBind.singleton<SearchStore>((i) => SearchStore(i())),
   ];
@@ -31,7 +32,8 @@ class AppModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, __) => const SearchPage()),
-    ChildRoute('/details', child: (_, args) => DetailsPage(result: args.data), guards: [GuardT()]),
+    ChildRoute('/details',
+        child: (_, args) => DetailsPage(result: args.data), guards: [GuardT()]),
   ];
 }
 

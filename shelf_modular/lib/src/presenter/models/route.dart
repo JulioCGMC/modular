@@ -92,9 +92,11 @@ class Route extends ModularRoute {
     );
   }
 
-  factory Route.module(String name,
-      {required Module module,
-      List<ModularMiddleware> middlewares = const []}) {
+  factory Route.module(
+    String name, {
+    required Module module,
+    List<ModularMiddleware> middlewares = const [],
+  }) {
     final route = Route._(name, middlewares: middlewares);
     return route.addModule(name, module: module);
   }
@@ -129,7 +131,7 @@ class Route extends ModularRoute {
       name ?? this.name,
       handler: handler ?? this.handler,
       schema: schema ?? this.schema,
-      middlewares: (middlewares ?? this.middlewares),
+      middlewares: middlewares ?? this.middlewares,
       children: children ?? this.children,
       parent: parent ?? this.parent,
       module: module ?? this.module,

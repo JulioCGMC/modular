@@ -24,8 +24,10 @@ void main() {
       expect(service.getBind<String>().getOrNull(), 'test');
     });
     test('should throw error not found bind', () {
-      when(() => injector.get<String>()).thenThrow(AutoInjectorException('String'));
-      expect(service.getBind<String>().exceptionOrNull(), isA<BindNotFoundException>());
+      when(() => injector.get<String>())
+          .thenThrow(const AutoInjectorException('String'));
+      expect(service.getBind<String>().exceptionOrNull(),
+          isA<BindNotFoundException>());
     });
   });
 
