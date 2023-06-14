@@ -69,3 +69,54 @@ class TripleBind {
     );
   }
 }
+
+class TripleAutoBind {
+  static Listenable _generateNotifier(BaseStore store) {
+    final notifier = LocalNotifier();
+    store.observer(
+      onState: (_) => notifier.update(),
+      onError: (_) => notifier.update(),
+      onLoading: (_) => notifier.update(),
+    );
+
+    return notifier;
+  }
+
+  static Bind<T> singleton<T extends BaseStore>(
+    Function factoryFunction,
+  ) {
+    return AutoBind.singleton<T>(
+      factoryFunction,
+      onDispose: (store) {
+        store.destroy();
+      },
+      notifier: _generateNotifier,
+    );
+  }
+
+  static Bind<T> lazySingleton<T extends BaseStore>(
+    Function factoryFunction, {
+    bool export = false,
+  }) {
+    return AutoBind.lazySingleton<T>(
+      factoryFunction,
+      onDispose: (store) {
+        store.destroy();
+      },
+      notifier: _generateNotifier,
+    );
+  }
+
+  static Bind<T> factory<T extends BaseStore>(
+    Function factoryFunction, {
+    bool export = false,
+  }) {
+    return AutoBind.factory<T>(
+      factoryFunction,
+      onDispose: (store) {
+        store.destroy();
+      },
+      notifier: _generateNotifier,
+    );
+  }
+}
