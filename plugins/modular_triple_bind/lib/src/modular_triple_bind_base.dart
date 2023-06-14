@@ -7,7 +7,7 @@ class LocalNotifier extends ChangeNotifier {
 }
 
 class TripleBind {
-  static Listenable _generateNotifier(Store store) {
+  static Listenable _generateNotifier(BaseStore store) {
     final notifier = LocalNotifier();
     store.observer(
       onState: (_) => notifier.update(),
@@ -18,7 +18,7 @@ class TripleBind {
     return notifier;
   }
 
-  static Bind<T> singleton<T extends Store>(
+  static Bind<T> singleton<T extends BaseStore>(
     T Function(AutoInjector i) factoryFunction,
   ) {
     return Bind.singleton<T>(
@@ -30,7 +30,7 @@ class TripleBind {
     );
   }
 
-  static Bind<T> lazySingleton<T extends Store>(
+  static Bind<T> lazySingleton<T extends BaseStore>(
     T Function(AutoInjector i) factoryFunction, {
     bool export = false,
   }) {
@@ -43,7 +43,7 @@ class TripleBind {
     );
   }
 
-  static Bind<T> factory<T extends Store>(
+  static Bind<T> factory<T extends BaseStore>(
     T Function(AutoInjector i) factoryFunction, {
     bool export = false,
   }) {
@@ -56,7 +56,7 @@ class TripleBind {
     );
   }
 
-  static Bind<T> instance<T extends Store>(
+  static Bind<T> instance<T extends BaseStore>(
     T store, {
     bool export = false,
   }) {
