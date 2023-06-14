@@ -172,14 +172,11 @@ class _Tracker implements Tracker {
   }
 
   void _removeRegisters(String tag) {
-    injector.uncommit();
-
     injector.disposeSingletonsByTag(
       tag,
       onRemoved: _disposeInstance,
     );
     injector.removeByTag(tag);
-    injector.commit();
 
     print('-- $tag DISPOSED');
   }
@@ -324,8 +321,7 @@ class _Tracker implements Tracker {
       }
 
       if (preview.name.contains('**')) {
-        if (!actual.name.contains('**') ||
-            actual.name.split('/').length > preview.name.split('/').length) {
+        if (!actual.name.contains('**') || actual.name.split('/').length > preview.name.split('/').length) {
           return 1;
         }
       }
