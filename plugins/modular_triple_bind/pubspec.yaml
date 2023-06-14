@@ -1,6 +1,6 @@
 name: modular_triple_bind
 description: Smart project structure with dependency injection and route management
-version: 2.0.0
+version: 2.0.0-beta.1
 homepage: https://github.com/Flutterando/modular
 
 environment:

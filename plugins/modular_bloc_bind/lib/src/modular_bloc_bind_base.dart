@@ -62,3 +62,50 @@ class BlocBind {
     );
   }
 }
+
+class BlocAutoBind {
+  static Bind<T> singleton<T extends BlocBase>(
+    Function factoryFunction, {
+    bool export = false,
+  }) {
+    return AutoBind.singleton<T>(
+      factoryFunction,
+      onDispose: (bloc) {
+        bloc.close();
+      },
+      notifier: (bloc) {
+        return bloc.stream;
+      },
+    );
+  }
+
+  static Bind<T> lazySingleton<T extends BlocBase>(
+    Function factoryFunction, {
+    bool export = false,
+  }) {
+    return AutoBind.lazySingleton<T>(
+      factoryFunction,
+      onDispose: (bloc) {
+        bloc.close();
+      },
+      notifier: (bloc) {
+        return bloc.stream;
+      },
+    );
+  }
+
+  static Bind<T> factory<T extends BlocBase>(
+    Function factoryFunction, {
+    bool export = false,
+  }) {
+    return AutoBind.factory<T>(
+      factoryFunction,
+      onDispose: (bloc) {
+        bloc.close();
+      },
+      notifier: (bloc) {
+        return bloc.stream;
+      },
+    );
+  }
+}

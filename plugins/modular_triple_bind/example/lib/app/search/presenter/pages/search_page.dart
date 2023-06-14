@@ -39,7 +39,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget _buildError(Failure error) {
+  Widget _buildError(error) {
     if (error is EmptyList) {
       return const Center(
         child: Text('Nothing has been found'),
@@ -78,8 +78,7 @@ class _SearchPageState extends State<SearchPage> {
           Expanded(
             child: store.when(
               onState: _buildList,
-              onLoading: (loading) =>
-                  const Center(child: CircularProgressIndicator()),
+              onLoading: (loading) => const Center(child: CircularProgressIndicator()),
               onError: _buildError,
             ),
           ),
