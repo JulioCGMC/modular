@@ -1,3 +1,6 @@
+## [3.1.0] - 07/11/2020.
+* Update for new analyzer and build_config versions.
+
 ## [2.0.1] - 07/11/2020.
 * Fix error in Flutter 1.22.3
 

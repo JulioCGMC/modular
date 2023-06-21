@@ -26,7 +26,7 @@ abstract class CustomGeneratorForAnnotatedField<AnnotationType>
     final values = <String>{};
 
     for (final element in library.allElements) {
-      if (element is ClassElement && !element.isEnum) {
+      if (element is ClassElement && !element.isDartCoreEnum) {
         for (final field in element.fields) {
           final annotation = getAnnotation(field);
           if (annotation != null) {
