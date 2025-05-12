@@ -47,7 +47,11 @@ class ModularRouteInformationParser
       path = location;
     }
 
-    return selectBook(path);
+    final qp = routeInformation.uri.queryParameters;
+    return selectBook(
+      path,
+      arguments: qp,
+    );
   }
 
   @override
