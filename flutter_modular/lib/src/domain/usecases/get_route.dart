@@ -5,7 +5,7 @@ import '../dtos/route_dto.dart';
 import '../services/route_service.dart';
 
 abstract class GetRoute {
-  AsyncResultDart<ModularRoute, ModularError> call(RouteParmsDTO params);
+  AsyncResult<ModularRoute, ModularError> call(RouteParmsDTO params);
 }
 
 class GetRouteImpl implements GetRoute {
@@ -14,7 +14,7 @@ class GetRouteImpl implements GetRoute {
   GetRouteImpl(this.service);
 
   @override
-  AsyncResultDart<ModularRoute, ModularError> call(RouteParmsDTO params) {
+  AsyncResult<ModularRoute, ModularError> call(RouteParmsDTO params) {
     return service.getRoute(params);
   }
 }

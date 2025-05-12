@@ -60,7 +60,8 @@ final injector = AutoInjector(
     //presenter
     i.addInstance(GlobalKey<NavigatorState>());
     i.addSingleton<ModularRouteInformationParser>(
-        ModularRouteInformationParser.new);
+      ModularRouteInformationParser.new,
+    );
     i.addSingleton<ModularRouterDelegate>(ModularRouterDelegate.new);
     i.add<IModularNavigator>(() => i<ModularRouterDelegate>());
     i.addLazySingleton<IModularBase>(ModularBase.new);

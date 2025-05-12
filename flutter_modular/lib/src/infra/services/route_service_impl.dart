@@ -11,8 +11,7 @@ class RouteServiceImpl implements RouteService {
   RouteServiceImpl(this.tracker);
 
   @override
-  AsyncResultDart<ModularRoute, ModularError> getRoute(
-      RouteParmsDTO params) async {
+  AsyncResult<ModularRoute, ModularError> getRoute(RouteParmsDTO params) async {
     final route = await tracker.findRoute(
       params.url,
       data: params.arguments,
@@ -26,24 +25,24 @@ class RouteServiceImpl implements RouteService {
   }
 
   @override
-  ResultDart<ModularArguments, ModularError> getArguments() {
+  Result<ModularArguments, ModularError> getArguments() {
     return Success(tracker.arguments);
   }
 
   @override
-  ResultDart<Unit, ModularError> reportPop(ModularRoute route) {
+  Result<Unit, ModularError> reportPop(ModularRoute route) {
     tracker.reportPopRoute(route);
     return const Success(unit);
   }
 
   @override
-  ResultDart<Unit, ModularError> setArguments(ModularArguments args) {
+  Result<Unit, ModularError> setArguments(ModularArguments args) {
     tracker.setArguments(args);
     return const Success(unit);
   }
 
   @override
-  ResultDart<Unit, ModularError> reportPush(ModularRoute route) {
+  Result<Unit, ModularError> reportPush(ModularRoute route) {
     tracker.reportPushRoute(route);
     return const Success(unit);
   }

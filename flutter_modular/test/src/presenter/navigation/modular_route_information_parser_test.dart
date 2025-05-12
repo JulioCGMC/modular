@@ -48,11 +48,11 @@ void main() {
     reportPush = ReportPushMock();
     urlService = UrlServiceMock();
     parser = ModularRouteInformationParser(
-      getRoute,
-      getArguments,
-      setArguments,
-      reportPush,
-      urlService,
+      getArguments: getArguments,
+      getRoute: getRoute,
+      setArguments: setArguments,
+      reportPush: reportPush,
+      urlService: urlService,
     );
   });
 

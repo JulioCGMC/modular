@@ -4,7 +4,7 @@ import 'package:result_dart/result_dart.dart';
 import '../services/bind_service.dart';
 
 abstract class ReplaceInstance {
-  ResultDart<Unit, ModularError> call<T>(T instance, [String? key]);
+  Result<Unit, ModularError> call<T>(T instance, [String? key]);
 }
 
 class ReplaceInstanceImpl implements ReplaceInstance {
@@ -13,7 +13,7 @@ class ReplaceInstanceImpl implements ReplaceInstance {
   ReplaceInstanceImpl(this.bindService);
 
   @override
-  ResultDart<Unit, ModularError> call<T>(T instance, [String? key]) {
+  Result<Unit, ModularError> call<T>(T instance, [String? key]) {
     return bindService.replaceInstance<T>(instance, key);
   }
 }

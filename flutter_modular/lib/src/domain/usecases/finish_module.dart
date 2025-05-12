@@ -4,7 +4,7 @@ import 'package:result_dart/result_dart.dart';
 import '../services/module_service.dart';
 
 abstract class FinishModule {
-  ResultDart<Unit, ModularError> call();
+  Result<Unit, ModularError> call();
 }
 
 class FinishModuleImpl implements FinishModule {
@@ -13,7 +13,7 @@ class FinishModuleImpl implements FinishModule {
   FinishModuleImpl(this.moduleService);
 
   @override
-  ResultDart<Unit, ModularError> call() {
+  Result<Unit, ModularError> call() {
     return moduleService.finish();
   }
 }
